@@ -163,13 +163,11 @@
         var BEAM_MIDDLE_X = 150;
         var BEAM_MIDDLE_Y = 150;
 
-        var FINISH_LEFT_TOP_X = 357;
-        var FINISH_LEFT_TOP_Y = 192;
-
-        var FINISH_RIGHT_BOTTOM_X = 398;
-        var FINISH_RIGHT_BOTTOM_Y = 348;
-
         var STEP_SIZE = 2;
+
+        var GROUND_SOLID = 0;
+        var GROUND_EMPTY = 1;
+        var GROUND_EXIT = 2;
 
         var leaderX = characterX;
         var leaderY = characterY;
@@ -205,6 +203,8 @@
             $("#gameContainer").off("mousemove").off("click");
             turnOffLeaderStar();
             $("#character").fadeOut();
+            $("#lightBeam").fadeOut();
+            $("#exit").fadeOut();
 
             $("#outroImage").fadeIn(2000, outroImageCallback);
         }
@@ -222,18 +222,31 @@
         }
 
         /**
-         * Determine whether it is possible to walk to dofined coordinates.
-         */
-        function isWalkable(x, y) {
+         * Retrieve type of ground based on pixel color
+         **/
+        function getGroundType(x, y) {
             pixelData = mazeContext.getImageData(x, y, 1, 1).data;
 
-            // Only white pixes are walkable
-            if ((pixelData[0] == 255) && (pixelData[1] == 255) && (pixelData[2] == 255)) {
-                return true;
+            // Green marks exit
+            if ((pixelData[0] == 0) && (pixelData[1] == 255) && (pixelData[2] == 0)) {
+                return GROUND_EXIT;
+            } else if ((pixelData[0] == 255) && (pixelData[1] == 255) && (pixelData[2] == 255)) {
+                return GROUND_EMPTY;
             }
 
-            return false;
+            return GROUND_SOLID;
         }
+
+        /**
+         * Determine whether it is possible to walk to defined coordinates.
+         */
+        function isWalkable(x, y) {
+            if (getGroundType(x,y) == GROUND_SOLID) {
+                return false;
+            }
+            return true;
+        }
+
 
         /**
          * Place character to defined coordinates
@@ -250,11 +263,10 @@
             characterY = y;
 
             // Check for finish
-            // if ((FINISH_LEFT_TOP_X < x) && (FINISH_RIGHT_BOTTOM_X > x) &&
-            //         (FINISH_LEFT_TOP_Y < y) && (FINISH_RIGHT_BOTTOM_Y > y)) {
-            //     turnOffLeaderStar();
-            //     finishReached();
-            // }
+            if (getGroundType(x,y) == GROUND_EXIT) {
+                turnOffLeaderStar();
+                finishReached();
+            }
 
             $("#character").css("left",characterX-CHARACTER_MIDDLE_X+"px").css("top",characterY-CHARACTER_MIDDLE_Y+"px");
             $("#lightBeam").css("margin-left",characterX-BEAM_MIDDLE_X+"px").css("margin-top",characterY-BEAM_MIDDLE_Y+"px");
@@ -439,6 +451,8 @@
             $("#gameContainer").mousemove(mouseMoveHandler).click(mouseClickHandler);
             setCharacterPosition(characterX, characterY);
             $("#character").fadeIn();
+            $("#lightBeam").fadeIn();
+            $("#exit").fadeIn();
         }
 
         /**
