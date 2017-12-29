@@ -206,7 +206,8 @@
             $("#lightBeam").fadeOut();
             $("#exit").fadeOut();
 
-            $("#outroImage").fadeIn(2000, outroImageCallback);
+            // $("#outroImage").fadeIn(2000, outroImageCallback);
+            outroImageCallback();
         }
 
         /**
@@ -424,7 +425,7 @@
          * Restart of application was requested. Reset all necessary data
          */
         function restartHandler() {
-            $("#outroImage").fadeOut(2500, stageReadyHandler);
+            // $("#outroImage").fadeOut(2500, stageReadyHandler);
             $("#pfmessage").fadeOut();
             $("#author").fadeOut();
             $("#restartButton").fadeOut();
@@ -434,6 +435,8 @@
 
             characterX = CHARACTER_START_X;
             characterY = CHARACTER_START_Y;
+     
+            stageReadyHandler();
         }
 
         /**
@@ -488,7 +491,7 @@
     <div id="character"></div>
     <div id="exit"></div>
     <div id="leaderPointer" style="display: none;"></div>
-    <img id="outroImage" src="img/outro.jpg" style="display: none;">
+    <!-- <img id="outroImage" src="img/outro.jpg" style="display: none;"> -->
     <div id="pfmessage">PF 2018</div>
     <div id="author"><a href="http://georgik.rocks">Juraj</a></div>
     <div id="restartButton">Restart</div>
