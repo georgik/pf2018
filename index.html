@@ -7,6 +7,10 @@
     <!-- Author: Juraj Michalek - 2017 - http://georgik.rocks -->
 
     <style>
+        body {
+            background-color: #000;
+        }
+
         #gameContainer {
             width: 700px;
             height: 675px;
@@ -113,6 +117,41 @@
             display: none;
         }
 
+        #infoButton {
+            z-index: 120;
+            position: absolute;
+            font-family: 'Flavors', cursive;
+            text-shadow: gray 2px 2px 2px;
+            font-size: 32px;
+            width: 160px;
+            height: 40px;
+            top:10px;
+            left: 10px;
+            border-radius: 10px;
+            border: 2px solid black;
+            background: #CCCCCC;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #credits {
+            z-index: 130;
+            position: absolute;
+            font-family: 'Flavors', cursive;
+            text-shadow: gray 2px 2px 2px;
+            font-size: 24px;
+            width: 600px;
+            height: 450px;
+            padding-left: 20px;
+            top:10px;
+            left: 10px;
+            border-radius: 10px;
+            border: 2px solid black;
+            background: #CCCCCC;
+            cursor: pointer;
+        }
+
+
         #restartButton:hover {
             border: 2px solid #9acd32;
             background: #EEEEEE;
@@ -204,6 +243,7 @@
             turnOffLeaderStar();
             $("#character").fadeOut();
             $("#lightBeam").fadeOut();
+            $("#infoButton").fadeOut();
             $("#exit").fadeOut();
 
             // $("#outroImage").fadeIn(2000, outroImageCallback);
@@ -429,6 +469,7 @@
             $("#pfmessage").fadeOut();
             $("#author").fadeOut();
             $("#restartButton").fadeOut();
+            $("#infoButton").fadeOut();
 
             // resume game life
             isGameRunning = true;
@@ -456,6 +497,15 @@
             $("#character").fadeIn();
             $("#lightBeam").fadeIn();
             $("#exit").fadeIn();
+            $("#infoButton").fadeIn();
+        }
+
+        /**
+         * Diplay information panel.
+         **/
+        function infoHandler() {
+            $("#credits").fadeIn();
+            isGameRunning = false;
         }
 
         /**
@@ -463,6 +513,15 @@
          */
         function redirectToGoogleChrome() {
             $(location).attr('href',"https://www.google.com/chrome");
+        }
+
+        /**
+         * Quit displaying of credits.
+         **/
+        function creditsHandler() {
+            $("#credits").fadeOut();
+            isGameRunning = true;
+            hearbeat();
         }
 
         $(document).ready(function () {
@@ -475,6 +534,8 @@
 
             //$("#layoutImage").load(stageReadyHandler);
             $("#restartButton").on("click",restartHandler);
+            $("#infoButton").on("click", infoHandler);
+            $("#credits").on("click", creditsHandler);
         });
 
         $(window).load(stageReadyHandler);
@@ -495,6 +556,17 @@
     <div id="pfmessage">PF 2018</div>
     <div id="author"><a href="http://georgik.rocks">Juraj</a></div>
     <div id="restartButton">Restart</div>
+    <div id="infoButton">Info</div>
+    <div id="credits" style="display: none">
+        <h2>Goal of the game</h2>
+        <div>Find your path through the labyrinth.</div>
+        <div>Reach the point marked by stars.</div>
+        <h2>Credits</h2>
+        <div>Author of the game: <a href="http://georgik.rocks">Juraj Michálek</a></div>
+        <div>Game design consultation: <a href="https://www.youtube.com/channel/UCTriXkFwuqBI1I48EfGKd1Q">Tondo PX</a></div>
+        <div>Location of the labyrinth: <a href="https://www.google.cz/maps/@49.6648256,18.6649715,3a,75y,160.84h,62.54t/data=!3m6!1e1!3m4!1sStFTEet9EIXELsl3_qxhrg!2e0!7i13312!8i6656?hl=cs">49.664750, 18.664956</a></div>
+        <div>Author of the labyrinth: <a href="http://www.masazepeli.cz/clanky/labyrint-trinec---video/">Petr Litvák</a></div>
+    </div>
     <div id="notSupportedMessage">
         <div>PF 2018 :)</div>
         <div>BTW:</div>
