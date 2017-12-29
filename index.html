@@ -11,6 +11,10 @@
             background-color: #000;
         }
 
+        #audio {
+            width: 700px;
+        }
+
         #gameContainer {
             width: 700px;
             height: 675px;
@@ -117,6 +121,23 @@
             display: none;
         }
 
+        #startButton {
+            z-index: 150;
+            position: absolute;
+            font-family: 'Flavors', cursive;
+            text-shadow: gray 2px 2px 2px;
+            font-size: 32px;
+            width: 160px;
+            height: 40px;
+            top:300px;
+            left: 280px;
+            border-radius: 10px;
+            border: 2px solid black;
+            background: #CCCCCC;
+            cursor: pointer;
+            text-align: center;
+        }
+
         #infoButton {
             z-index: 120;
             position: absolute;
@@ -140,7 +161,7 @@
             font-family: 'Flavors', cursive;
             text-shadow: gray 2px 2px 2px;
             font-size: 24px;
-            width: 600px;
+            width: 650px;
             height: 450px;
             padding-left: 20px;
             top:10px;
@@ -383,8 +404,6 @@
             var x = event.pageX - this.offsetLeft;
             var y = event.pageY - this.offsetTop;
 
-            //$('#info').html(x + ', ' + y);
-
             // Invalid values of coordinates
             if (!x || !y) {
                 return;
@@ -524,6 +543,13 @@
             hearbeat();
         }
 
+        function startHandler() {
+            $("#startButton").fadeOut();
+            $("#infoButton").fadeIn();
+            stageReadyHandler();
+            document.getElementById('audio').play();
+        }
+
         $(document).ready(function () {
             // Test canvas support
             if (!("HTMLCanvasElement" in window)) {
@@ -536,9 +562,10 @@
             $("#restartButton").on("click",restartHandler);
             $("#infoButton").on("click", infoHandler);
             $("#credits").on("click", creditsHandler);
+            $("#startButton").on("click", startHandler);
         });
 
-        $(window).load(stageReadyHandler);
+        // $(window).load(stageReadyHandler);
 
 
     </script>
@@ -556,14 +583,15 @@
     <div id="pfmessage">PF 2018</div>
     <div id="author"><a href="http://georgik.rocks">Juraj</a></div>
     <div id="restartButton">Restart</div>
-    <div id="infoButton">Info</div>
+    <div id="startButton">Start</div>
+    <div id="infoButton" style="display: none;">Info</div>
     <div id="credits" style="display: none">
         <h2>Goal of the game</h2>
         <div>Find your path through the labyrinth.</div>
         <div>Reach the point marked by stars.</div>
         <h2>Credits</h2>
         <div>Author of the game: <a href="http://georgik.rocks">Juraj Michálek</a></div>
-        <div>Game design consultation: <a href="https://www.youtube.com/channel/UCTriXkFwuqBI1I48EfGKd1Q">Tondo PX</a></div>
+        <div>Music: <a href="https://youtu.be/KUME6AZSXNQ">JCS - Everything is all righ - piano cover - Tondo PX</a></div>
         <div>Location of the labyrinth: <a href="https://www.google.cz/maps/@49.6648256,18.6649715,3a,75y,160.84h,62.54t/data=!3m6!1e1!3m4!1sStFTEet9EIXELsl3_qxhrg!2e0!7i13312!8i6656?hl=cs">49.664750, 18.664956</a></div>
         <div>Author of the labyrinth: <a href="http://www.masazepeli.cz/clanky/labyrint-trinec---video/">Petr Litvák</a></div>
     </div>
@@ -579,6 +607,8 @@
 <canvas id="canvas" width="700px" height="675px" style="display: none;">Canvas is not supported. Please use modern browser.</canvas>
 
 <img id="layoutImage" src="img/maze/trinec/maze-layout.png" style="display: none;">
-
+<audio id="audio" controls loop="loop">
+        <source src="http://georgik.rocks/wp-content/mp3/tondo-px/jcs-everything-piano-cover.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
