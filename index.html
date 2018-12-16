@@ -3,8 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <title>Merry Christmas - Small Maze - 2018</title>
 
-    <!-- Author: Juraj Michalek - 2017 - http://georgik.rocks -->
+    <!-- Author: Juraj Michalek - 2017-2018 - http://georgik.rocks -->
 
     <style>
         body {
@@ -16,18 +17,18 @@
         }
 
         #gameContainer {
-            width: 700px;
-            height: 675px;
+            width: 770px;
+            height: 580px;
             overflow: hidden;
-            background: url(img/maze/trinec/maze-image.jpg);
+            background: url(img/maze/xmas/maze-image.jpg);
             position: relative;
         }
 
         #character {
             width: 16px;
             height: 16px;
-            left: 350px;
-            top: 600px;
+            left: 584px;
+            top: 110px;
             background: url(img/character.png);
             position: absolute;
         }
@@ -35,8 +36,8 @@
         #exit {
             width: 16px;
             height: 16px;
-            left: 376px;
-            top: 303px;
+            left: 310px;
+            top: 418px;
             background: url(img/exit-point.png) left center;
             z-index: 110;
             position: absolute;
@@ -58,8 +59,8 @@
             border-color: #000;
             top: -100vh;
             left: -100vw;
-            margin-top: 500px;
-            margin-left: 260px;
+            margin-top: 24px;
+            margin-left: 490px;
             background: #000;
             box-sizing: content-box;
             background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,1) 60%,rgba(0,0,0,1) 100%);
@@ -74,7 +75,7 @@
 
         #pfmessage {
             position: absolute;
-            color: white;
+            color: yellow;
             text-shadow: gray 2px 2px 2px;
             top: -72px;
             left: 240px;
@@ -208,12 +209,12 @@
 
         var mazeContext = null;
 
-        var WIDTH=700;
-        var HEIGHT=675;
+        var WIDTH=770;
+        var HEIGHT=600;
         var HEARTBEAT_TIME = 50;
 
-        var CHARACTER_START_X = 350;
-        var CHARACTER_START_Y = 600;
+        var CHARACTER_START_X = 584;
+        var CHARACTER_START_Y = 110;
 
         var characterX = CHARACTER_START_X;
         var characterY = CHARACTER_START_Y;
@@ -509,7 +510,7 @@
                 return;
             }
 
-            initalizeMaze("trinec");
+            initalizeMaze("xmas");
             timer = setTimeout('hearbeat()',HEARTBEAT_TIME);
             $("#gameContainer").mousemove(mouseMoveHandler).click(mouseClickHandler);
             setCharacterPosition(characterX, characterY);
@@ -547,7 +548,7 @@
             $("#startButton").fadeOut();
             $("#infoButton").fadeIn();
             stageReadyHandler();
-            document.getElementById('audio').play();
+            // document.getElementById('audio').play();
         }
 
         $(document).ready(function () {
@@ -580,7 +581,7 @@
     <div id="exit"></div>
     <div id="leaderPointer" style="display: none;"></div>
     <!-- <img id="outroImage" src="img/outro.jpg" style="display: none;"> -->
-    <div id="pfmessage">PF 2018</div>
+    <div id="pfmessage">Merry Christmass - 2018</div>
     <div id="author"><a href="http://georgik.rocks">Juraj</a></div>
     <div id="restartButton">Restart</div>
     <div id="startButton">Start</div>
@@ -590,10 +591,10 @@
         <div>Find your path through the labyrinth.</div>
         <div>Reach the point marked by stars.</div>
         <h2>Credits</h2>
-        <div>Author of the game: <a href="http://georgik.rocks">Juraj Michálek</a></div>
-        <div>Music: <a href="https://youtu.be/KUME6AZSXNQ">JCS - Everything is all righ - piano cover - Tondo PX</a></div>
-        <div>Location of the labyrinth: <a href="https://www.google.cz/maps/@49.6648256,18.6649715,3a,75y,160.84h,62.54t/data=!3m6!1e1!3m4!1sStFTEet9EIXELsl3_qxhrg!2e0!7i13312!8i6656?hl=cs">49.664750, 18.664956</a></div>
-        <div>Author of the labyrinth: <a href="http://www.masazepeli.cz/clanky/labyrint-trinec---video/">Petr Litvák</a></div>
+        <div>Author of the game: <a href="https://georgik.rocks">Juraj Michálek</a></div>
+        <!--<div>Music: </div>-->
+        <!--<div>Location of the labyrinth: </div>-->
+        <!--<div>Author of the labyrinth: </div>-->
     </div>
     <div id="notSupportedMessage">
         <div>PF 2018 :)</div>
@@ -604,11 +605,11 @@
     </div>
 </div>
 
-<canvas id="canvas" width="700px" height="675px" style="display: none;">Canvas is not supported. Please use modern browser.</canvas>
+<canvas id="canvas" width="780px" height="675px" style="display: none;">Canvas is not supported. Please use modern browser.</canvas>
 
-<img id="layoutImage" src="img/maze/trinec/maze-layout.png" style="display: none;">
-<audio id="audio" controls loop="loop">
-        <source src="https://georgik.rocks/wp-content/mp3/tondo-px/jcs-everything-piano-cover.mp3" type="audio/mpeg">
-</audio>
+<img id="layoutImage" src="img/maze/xmas/maze-layout.png" style="display: none;">
+<!--<audio id="audio" controls loop="loop">-->
+        <!--<source src="https://georgik.rocks/wp-content/mp3/tondo-px/jcs-everything-piano-cover.mp3" type="audio/mpeg">-->
+<!--</audio>-->
 </body>
 </html>
